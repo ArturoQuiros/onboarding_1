@@ -100,9 +100,9 @@ export const Sidebar = () => {
 
   const menuItems = [
     { icon: <BsHouse />, label: t("sidebar.home") },
-    { icon: <BsInfoCircle />, label: t("sidebar.about") },
-    { icon: <BsGear />, label: t("sidebar.services") },
-    { icon: <BsEnvelope />, label: t("sidebar.contact") },
+    { icon: <BsInfoCircle />, label: t("sidebar.countries") },
+    { icon: <BsGear />, label: t("sidebar.staff") },
+    { icon: <BsEnvelope />, label: t("sidebar.customers") },
   ];
 
   return (

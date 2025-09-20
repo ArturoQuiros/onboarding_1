@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { BsTranslate } from "react-icons/bs";
-import { LanguageContext } from "../../Context/LanguageContext"; // Importación corregida
+import { LanguageContext } from "../../Context/LanguageContext";
 
 export const Navbar = () => {
   const { i18n } = useTranslation("global");
@@ -51,6 +51,8 @@ export const Navbar = () => {
       alignItems: "center",
       gap: "6px",
       transition: "background-color 0.2s, color 0.2s",
+      // Agrega esto para eliminar el contorno del navegador
+      outline: "none",
     },
     langButtonHover: {
       backgroundColor: "rgb(232, 26, 59)",
@@ -86,7 +88,7 @@ export const Navbar = () => {
           title="Cambiar idioma"
         >
           <BsTranslate style={{ fontSize: "20px" }} />
-          <span>{i18n.language === "es" ? "ES" : "EN"}</span>
+          <span>{i18n.language === "es" ? "EN" : "ES"}</span>
         </button>
       </div>
     </nav>
