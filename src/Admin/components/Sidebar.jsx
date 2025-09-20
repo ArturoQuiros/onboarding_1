@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { BsArrowBarLeft, BsList } from "react-icons/bs";
-import { BsHouse, BsInfoCircle, BsGear, BsEnvelope } from "react-icons/bs";
+import {
+  BsArrowBarLeft,
+  BsList,
+  BsHouse,
+  BsInfoCircle,
+  BsGear,
+  BsEnvelope,
+} from "react-icons/bs";
+import { UIContext } from "../../Context/UIContext"; // Importación corregida
 
-// Recibe isOpen y setIsOpen como props
-export const Sidebar = ({ isOpen, setIsOpen }) => {
-  // Se vuelve a incluir 't' en la desestructuración
-  const { t, i18n } = useTranslation("global");
+export const Sidebar = () => {
+  const { t } = useTranslation("global");
+  const { isSidebarOpen, setIsSidebarOpen } = useContext(UIContext);
+
   const [hoveredItem, setHoveredItem] = useState(null);
   const [hoveredToggle, setHoveredToggle] = useState(false);
 
@@ -16,7 +23,7 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
       top: "60px",
       left: 0,
       height: "calc(100vh - 60px)",
-      width: isOpen ? "220px" : "70px",
+      width: isSidebarOpen ? "220px" : "70px",
       background: "rgb(232, 26, 59)",
       color: "#fff",
       transition: "width 0.3s cubic-bezier(.4,0,.2,1)",
@@ -46,7 +53,7 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
       transition: "background 0.3s, box-shadow 0.3s",
       display: "flex",
       alignItems: "center",
-      justifyContent: isOpen ? "flex-end" : "center",
+      justifyContent: isSidebarOpen ? "flex-end" : "center",
       boxShadow: hoveredToggle ? "0 4px 12px rgba(0,0,0,0.25)" : "none",
     },
     menu: {
@@ -84,10 +91,10 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
       textAlign: "center",
     },
     text: {
-      opacity: isOpen ? 1 : 0,
+      opacity: isSidebarOpen ? 1 : 0,
       transition: "opacity 0.3s cubic-bezier(.4,0,.2,1)",
-      marginLeft: isOpen ? "0" : "-12px",
-      pointerEvents: isOpen ? "auto" : "none",
+      marginLeft: isSidebarOpen ? "0" : "-12px",
+      pointerEvents: isSidebarOpen ? "auto" : "none",
     },
   };
 
@@ -100,18 +107,15 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
 
   return (
     <div style={styles.sidebar}>
-      {/* Toggle Button */}
       <button
         style={styles.toggleButton}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         onMouseEnter={() => setHoveredToggle(true)}
         onMouseLeave={() => setHoveredToggle(false)}
-        aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+        aria-label={isSidebarOpen ? "Cerrar menú" : "Abrir menú"}
       >
-        {isOpen ? <BsArrowBarLeft /> : <BsList />}
+        {isSidebarOpen ? <BsArrowBarLeft /> : <BsList />}
       </button>
-
-      {/* Menu Items */}
       <div style={styles.menu}>
         {menuItems.map((item, idx) => (
           <div

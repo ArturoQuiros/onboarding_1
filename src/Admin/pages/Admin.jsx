@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Navbar } from "../components/navbar";
-import { Sidebar } from "../components/sidebar";
+import React, { useContext } from "react";
+import { Navbar } from "../components/Navbar";
+import { Sidebar } from "../components/Sidebar";
+import { UIContext } from "../../Context/UIContext";
 
 export const Admin = () => {
-  // El estado del sidebar vive aquí
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const { isSidebarOpen } = useContext(UIContext);
 
   const styles = {
     container: {
@@ -14,7 +14,6 @@ export const Admin = () => {
     },
     mainContent: {
       flexGrow: 1,
-      // El margen se ajusta dinámicamente según el estado
       marginLeft: isSidebarOpen ? "220px" : "70px",
       padding: "20px",
       transition: "margin-left 0.3s cubic-bezier(.4,0,.2,1)",
@@ -26,14 +25,10 @@ export const Admin = () => {
   return (
     <div style={styles.container}>
       <Navbar />
-      {/* Le pasamos el estado y la función para cambiarlo al Sidebar */}
-      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <Sidebar />
       <div style={styles.mainContent}>
-        <h1>Contenido del CRUD</h1>
-        <p>
-          Aquí irá la tabla de datos, formularios y otras herramientas de
-          administración.
-        </p>
+        <h1>ADM Dashboard</h1>
+        <p>Aquí irá eventualmente un dashboard de ADM.</p>
       </div>
     </div>
   );

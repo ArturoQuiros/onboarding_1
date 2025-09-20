@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { BsTranslate } from "react-icons/bs";
+import { LanguageContext } from "../../Context/LanguageContext"; // Importación corregida
 
 export const Navbar = () => {
   const { i18n } = useTranslation("global");
+  const { setLanguage } = useContext(LanguageContext);
 
   const styles = {
     navbar: {
@@ -36,7 +38,6 @@ export const Navbar = () => {
       marginLeft: "auto",
       marginRight: "20px",
     },
-    // Estilo general para el botón de cambio de idioma
     langButton: {
       color: "rgb(232, 26, 59)",
       backgroundColor: "transparent",
@@ -51,18 +52,17 @@ export const Navbar = () => {
       gap: "6px",
       transition: "background-color 0.2s, color 0.2s",
     },
-    // Estilo al pasar el mouse por encima
     langButtonHover: {
       backgroundColor: "rgb(232, 26, 59)",
       color: "white",
     },
   };
 
-  const [hovered, setHovered] = React.useState(null);
+  const [hovered, setHovered] = useState(null);
 
   const handleLanguageToggle = () => {
     const newLang = i18n.language === "es" ? "en" : "es";
-    i18n.changeLanguage(newLang);
+    setLanguage(newLang);
   };
 
   return (

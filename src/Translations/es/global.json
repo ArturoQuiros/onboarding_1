@@ -1,8 +1,8 @@
 {
   "sidebar": {
     "home": "Inicio",
-    "about": "Acerca de",
-    "services": "Servicios",
-    "contact": "Contacto"
+    "countries": "Países",
+    "staff": "Staff",
+    "customers": "Clientes"
   }
 }

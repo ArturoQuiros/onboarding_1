@@ -1,7 +1,9 @@
-import "./App.css";
+import React from "react";
+import { Routes, Route } from "react-router"; // Importa de react-router-dom
 import { Landing } from "./Landing/pages/Landing";
-import { Routes, Route } from "react-router";
 import { Admin } from "./Admin/pages/admin";
+
+import "./App.css";
 
 function App() {
   return (
