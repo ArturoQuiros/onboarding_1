@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { BsArrowBarLeft, BsList } from "react-icons/bs";
+import { BsHouse, BsInfoCircle, BsGear, BsEnvelope } from "react-icons/bs";
 
-export const Sidebar = () => {
-  const { t } = useTranslation("global");
-  const [isOpen, setIsOpen] = useState(true);
+// Recibe isOpen y setIsOpen como props
+export const Sidebar = ({ isOpen, setIsOpen }) => {
+  // Se vuelve a incluir 't' en la desestructuración
+  const { t, i18n } = useTranslation("global");
   const [hoveredItem, setHoveredItem] = useState(null);
   const [hoveredToggle, setHoveredToggle] = useState(false);
 
@@ -66,11 +69,13 @@ export const Sidebar = () => {
       whiteSpace: "nowrap",
       background: "transparent",
       transform: "translateX(0)",
+      color: "#fff",
     },
     menuItemHover: {
       background: "rgba(255, 255, 255, 1)",
       boxShadow: "0 2px 12px rgba(232,28,59,0.12)",
       transform: "translateX(4px)",
+      color: "rgb(232, 26, 59)",
     },
     icon: {
       fontSize: "22px",
@@ -87,10 +92,10 @@ export const Sidebar = () => {
   };
 
   const menuItems = [
-    { icon: "🏠", label: t("navbar.home") },
-    { icon: "ℹ️", label: t("navbar.about") },
-    { icon: "🛠️", label: t("navbar.services") },
-    { icon: "📞", label: t("navbar.contact") },
+    { icon: <BsHouse />, label: t("sidebar.home") },
+    { icon: <BsInfoCircle />, label: t("sidebar.about") },
+    { icon: <BsGear />, label: t("sidebar.services") },
+    { icon: <BsEnvelope />, label: t("sidebar.contact") },
   ];
 
   return (
@@ -103,7 +108,7 @@ export const Sidebar = () => {
         onMouseLeave={() => setHoveredToggle(false)}
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
       >
-        {isOpen ? "←" : "☰"}
+        {isOpen ? <BsArrowBarLeft /> : <BsList />}
       </button>
 
       {/* Menu Items */}
