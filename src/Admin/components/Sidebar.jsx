@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router"; // Importamos el componente Link
 import {
   BsArrowBarLeft,
   BsList,
@@ -8,7 +9,7 @@ import {
   BsGear,
   BsEnvelope,
 } from "react-icons/bs";
-import { UIContext } from "../../Context/UIContext"; // Importación corregida
+import { UIContext } from "../../Context/UIContext";
 
 export const Sidebar = () => {
   const { t } = useTranslation("global");
@@ -77,6 +78,8 @@ export const Sidebar = () => {
       background: "transparent",
       transform: "translateX(0)",
       color: "#fff",
+      // Estilos para eliminar el estilo de enlace predeterminado
+      textDecoration: "none",
     },
     menuItemHover: {
       background: "rgba(255, 255, 255, 1)",
@@ -99,10 +102,19 @@ export const Sidebar = () => {
   };
 
   const menuItems = [
-    { icon: <BsHouse />, label: t("sidebar.home") },
-    { icon: <BsInfoCircle />, label: t("sidebar.countries") },
-    { icon: <BsGear />, label: t("sidebar.staff") },
-    { icon: <BsEnvelope />, label: t("sidebar.customers") },
+    // El "path" es la ruta a la que navega
+    { icon: <BsHouse />, label: t("sidebar.home"), path: "/admin" },
+    {
+      icon: <BsInfoCircle />,
+      label: t("sidebar.countries"),
+      path: "/admin/countries",
+    },
+    { icon: <BsGear />, label: t("sidebar.staff"), path: "/admin/staff" },
+    {
+      icon: <BsEnvelope />,
+      label: t("sidebar.customers"),
+      path: "/admin/customers",
+    },
   ];
 
   return (
@@ -118,19 +130,18 @@ export const Sidebar = () => {
       </button>
       <div style={styles.menu}>
         {menuItems.map((item, idx) => (
-          <div
+          // Usamos Link para navegar a la ruta definida en el objeto
+          <Link
+            to={item.path}
             key={idx}
-            style={{
-              ...styles.menuItem,
-              ...(hoveredItem === idx ? styles.menuItemHover : {}),
-            }}
+            style={styles.menuItem}
             onMouseEnter={() => setHoveredItem(idx)}
             onMouseLeave={() => setHoveredItem(null)}
             tabIndex={0}
           >
             <span style={styles.icon}>{item.icon}</span>
             <span style={styles.text}>{item.label}</span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
